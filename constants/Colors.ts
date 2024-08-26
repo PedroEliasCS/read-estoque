@@ -1,26 +1,30 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
-
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    text: "#11181C",
+    textBlue: "#070CB6",
+    textInverted: "#ECEDEE",
+    background: "#F9F9F9",
+    inputBackground: "#ECEDEE",
+    error: "#EA4335",
+    editableNot: "#EBEEF2",
+    placeHolder: "#807e7e",
+    noteContainer: "#070CB61C",
+    buttonActive: "#070CB6",
+    buttonInactive: "#ECEDEE",
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    text: "#ECEDEE",
+    textBlue: "#070CB6",
+    textInverted: "#11181C",
+    background: "#11181C",
+    inputBackground: "#1A1D1E",
+    error: "#FF0000",
+    editableNot: "#1A1D1E",
+    placeHolder: "#807e7e",
+    noteContainer: "#070CB61C",
+    buttonActive: "#070CB6",
+    buttonInactive: "#1A1D1E",
   },
 };
+
+export type ColorsType = keyof typeof Colors.light | keyof typeof Colors.dark;
