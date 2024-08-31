@@ -1,10 +1,10 @@
 import TextTheme from "@/components/Text";
 import { ThemedView } from "@/components/ThemedView";
 
-export default function Home() {
+export default function OpcoesPage() {
   return (
     <ThemedView>
-      <TextTheme>fafef</TextTheme>
+      <TextTheme>Opcoes</TextTheme>
     </ThemedView>
   );
 }

@@ -28,10 +28,10 @@ export function ThemedView({
 
 const styleC = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
+    padding: 5,
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 1,
+    width: "100%",
+    height: "100%",
   },
 });

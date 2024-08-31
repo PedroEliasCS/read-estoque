@@ -4,8 +4,8 @@ import LogoStars from "@/components/LogoStars";
 import TextTheme from "@/components/Text";
 import { ThemedView } from "@/components/ThemedView";
 import keyboardOpen from "@/hooks/keyboardOpen";
-import { StyleSheet, View } from "react-native";
 import { Link, router } from "expo-router";
+import { StyleSheet, View } from "react-native";
 
 export default function FirstScreen() {
   return (
@@ -17,7 +17,7 @@ export default function FirstScreen() {
         <Button
           titulo="Confirmar"
           onPress={() => {
-            router.navigate("/entradas");
+            router.navigate("/(auth)/tab");
           }}
         />
       </View>

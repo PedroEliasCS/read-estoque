@@ -11,6 +11,15 @@ export const Colors = {
     noteContainer: "#070CB61C",
     buttonActive: "#070CB6",
     buttonInactive: "#ECEDEE",
+    tabBarBackground: "#161040",
+    select: "#b67307",
+    backGroundItemList: "#f2f6fc",
+
+    entradaFundo: "#E4FFC1",
+    entradaTexto: "#65A810",
+
+    saidaFundo: "#FFC1C1",
+    saidaTexto: "#A81010",
   },
   dark: {
     text: "#ECEDEE",
@@ -24,6 +33,15 @@ export const Colors = {
     noteContainer: "#070CB61C",
     buttonActive: "#070CB6",
     buttonInactive: "#1A1D1E",
+    tabBarBackground: "#161040",
+    select: "#b67307",
+    backGroundItemList: "#1A1D1E",
+
+    entradaFundo: "#E4FFC1",
+    entradaTexto: "#65A810",
+
+    saidaFundo: "#FFC1C1",
+    saidaTexto: "#A81010",
   },
 };
 

@@ -14,14 +14,24 @@ enum Fonts {
 
 type Props = Text["props"] & {
   font?: keyof typeof Fonts;
+  colorThemeDark?: string;
+  colorThemeLight?: string;
 };
 
 export default function TextTheme({
   font = Fonts.PoppinsMedium,
+  colorThemeDark,
+  colorThemeLight,
   style,
   ...outherProps
 }: Props) {
-  const colorText = useThemeColor({}, "text");
+  const colorText = useThemeColor(
+    {
+      dark: colorThemeDark,
+      light: colorThemeLight,
+    },
+    "text"
+  );
 
   return (
     <Text

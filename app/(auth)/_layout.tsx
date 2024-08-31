@@ -1,36 +1,13 @@
-import { Tabs } from "expo-router";
+import { Stack } from "expo-router";
 
-export default function TabLayout() {
+export default function AuthRoutes() {
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-      }}
+    <Stack
+      screenOptions={{ headerShown: false }}
+      initialRouteName="/(auth)/tab/"
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-        }}
-      />
-      <Tabs.Screen
-        name="entradas"
-        options={{
-          title: "Entradas",
-        }}
-      />
-      <Tabs.Screen
-        name="saida"
-        options={{
-          title: "Saida",
-        }}
-      />
-      <Tabs.Screen
-        name="scanner"
-        options={{
-          title: "Scanner",
-        }}
-      />
-    </Tabs>
+      <Stack.Screen name="tab" />
+      <Stack.Screen name="scanner" />
+    </Stack>
   );
 }

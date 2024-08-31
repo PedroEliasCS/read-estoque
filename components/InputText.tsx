@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TextInputProps,
-  View,
-} from "react-native";
+import { StyleSheet, TextInput, TextInputProps, View } from "react-native";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import TextTheme from "./Text";
 const style = StyleSheet.create({
@@ -79,7 +73,12 @@ const style = StyleSheet.create({
  * @returns O elemento
  */
 export default function InputText(
-  props: TextInputProps & { titulo: string; error?: boolean; nota?: string }
+  props: TextInputProps & {
+    titulo: string;
+    error?: boolean;
+    nota?: string;
+    autoCompletes?: string[];
+  }
 ) {
   return (
     <View style={style.container}>

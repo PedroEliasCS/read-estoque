@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "pedido_id": "1",
+    "produto_id": "1",
+    "descricao": "Bota cor preta com atacador com cor metalica e brazão",
+    "sku": "SKU 2521651891"
+  },
+  {
+    "id": "2",
+    "pedido_id": "1",
+    "produto_id": "2",
+    "descricao": "Bota cor preta com atacador com cor metalica e brazão",
+    "sku": "SKU 2521651890"
+  },
+  {
+    "id": "3",
+    "pedido_id": "2",
+    "produto_id": "3",
+    "descricao": "Bota cor preta com atacador com cor metalica e brazão",
+    "sku": "SKU 2521651892"
+  },
+  {
+    "id": "4",
+    "pedido_id": "2",
+    "produto_id": "4",
+    "descricao": "Bota cor preta com atacador com cor metalica e brazão",
+    "sku": "SKU 2521651893"
+  },
+  {
+    "id": "5",
+    "pedido_id": "3",
+    "produto_id": "5",
+    "descricao": "Bota cor preta com atacador com cor metalica e brazão",
+    "sku": "SKU 2521651894"
+  },
+  {
+    "id": "6",
+    "pedido_id": "3",
+    "produto_id": "6",
+    "descricao": "Bota cor preta com atacador com cor metalica e brazão",
+    "sku": "SKU 2521651895"
+  },
+  {
+    "id": "7",
+    "pedido_id": "4",
+    "produto_id": "7",
+    "descricao": "Bota cor preta com atacador com cor metalica e brazão",
+    "sku": "SKU 2521651896"
+  },
+  {
+    "id": "8",
+    "pedido_id": "5",
+    "produto_id": "8",
+    "descricao": "Bota cor preta com atacador com cor metalica e brazão",
+    "sku": "SKU 2521651897"
+  },
+  {
+    "id": "9",
+    "pedido_id": "6",
+    "produto_id": "9",
+    "descricao": "Bota cor preta com atacador com cor metalica e brazão",
+    "sku": "SKU 2521651898"
+  },
+  {
+    "id": "10",
+    "pedido_id": "7",
+    "produto_id": "10",
+    "descricao": "Bota cor preta com atacador com cor metalica e brazão",
+    "sku": "SKU 2521651899"
+  }
+]

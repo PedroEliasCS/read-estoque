@@ -41,7 +41,7 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack
         screenOptions={{
-          headerShown: true,
+          headerShown: false,
         }}
       >
         <Stack.Screen
