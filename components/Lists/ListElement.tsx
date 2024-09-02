@@ -35,6 +35,10 @@ type PropsListElement<T> = {
   more?: IMore<T>;
 };
 
+/**
+ * Lista de item com recarregamento e carregamento de mais itens
+ * Com o objetivo de ser mostrado e recarregado
+ */
 export default function ListElement<T>({
   title,
   reload,

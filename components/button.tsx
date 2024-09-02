@@ -1,6 +1,6 @@
+import { useThemeColor } from "@/hooks/useThemeColor";
 import { Pressable, PressableProps, StyleSheet } from "react-native";
 import TextTheme from "./Text";
-import { useThemeColor } from "@/hooks/useThemeColor";
 
 type Props = PressableProps & {
   titulo: string;
@@ -23,7 +23,9 @@ export default function Button({ titulo, disabled, ...outherProps }: Props) {
     >
       <TextTheme
         style={{
-          color: useThemeColor({}, "textInverted"),
+          color: disabled
+            ? useThemeColor({}, "text")
+            : useThemeColor({}, "textInverted"),
         }}
         font="PoppinsBold"
       >

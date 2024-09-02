@@ -1,9 +1,9 @@
-import { Modal, Pressable, StyleSheet, View } from "react-native";
-import { ThemedView } from "../ThemedView";
-import TextTheme from "../Text";
-import InputText from "../InputText";
 import { useState } from "react";
+import { Modal, Pressable, StyleSheet, View } from "react-native";
 import Button from "../button";
+import InputText from "../InputText";
+import TextTheme from "../Text";
+import { ThemedView } from "../ThemedView";
 import styleModule from "./module.style";
 
 type PropsModalInputText = {
@@ -23,7 +23,12 @@ export default function ModalInputText({
   const [value, onChangeText] = useState("");
 
   return (
-    <Modal visible={true} transparent animationType="none">
+    <Modal
+      visible={true}
+      transparent
+      animationType="none"
+      onRequestClose={close}
+    >
       <View style={styles.container}>
         <Pressable style={styles.containerBackGround} onPress={close} />
 

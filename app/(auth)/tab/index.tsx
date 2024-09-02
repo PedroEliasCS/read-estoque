@@ -1,7 +1,7 @@
 import Api from "@/clients/api";
 import { IPedido } from "@/clients/types/api.types";
-import { RenderItemHome } from "@/components/List/ItemListElement";
-import ListElement from "@/components/List/ListElement";
+import { RenderItemHome } from "@/components/Lists/ItemListElement";
+import ListElement from "@/components/Lists/ListElement";
 import { ThemedView } from "@/components/ThemedView";
 import React from "react";
 

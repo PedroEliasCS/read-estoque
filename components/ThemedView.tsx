@@ -28,7 +28,6 @@ export function ThemedView({
 
 const styleC = StyleSheet.create({
   container: {
-    padding: 5,
     alignItems: "center",
     justifyContent: "center",
     width: "100%",

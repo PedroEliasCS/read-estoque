@@ -14,4 +14,5 @@ export interface IProdutoPedido {
   descricao: string;
   sku: string;
   scaneado: boolean;
+  url?: string;
 }

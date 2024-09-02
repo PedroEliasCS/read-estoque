@@ -1,4 +1,4 @@
-import ListForScan from "@/components/ListForScan/ListForScan";
+import ListForScan from "@/components/Lists/ListForScan";
 import { ThemedView } from "@/components/ThemedView";
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";

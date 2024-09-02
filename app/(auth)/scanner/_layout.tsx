@@ -9,12 +9,6 @@ export default function ScannerStack() {
         header: (i) => <Header {...i} />,
       }}
     >
-      <Stack.Screen
-        name="[tipo]/modalScanner"
-        options={{
-          presentation: "modal",
-        }}
-      />
       <Stack.Screen name="[tipo]/[pedido_id]" />
     </Stack>
   );

@@ -1,24 +1,19 @@
+import { Ionicons } from "@expo/vector-icons";
 import { CameraView, useCameraPermissions } from "expo-camera";
-import TextTheme from "./Text";
-import { ThemedView } from "./ThemedView";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
-import Button from "./button";
-import { RefObject, useRef, useState } from "react";
-import Loading from "./loading";
-import ModalInputText from "./modals/ModalInputText";
-import delay from "@/util/delay";
+import { useRef, useState } from "react";
+import { Dimensions, StyleSheet, TouchableOpacity, View } from "react-native";
+import Button from "../button";
+import Loading from "../loading";
+import ModalInputText from "../modals/ModalInputText";
+import TextTheme from "../Text";
+import { ThemedView } from "../ThemedView";
 
 type ScanQrCodeProps = {
   onScan: (data: string) => void;
+  close: () => void;
 };
 
-export default function ScanQrCode({ onScan }: ScanQrCodeProps) {
+export default function ScanQrCode({ onScan, close }: ScanQrCodeProps) {
   const window = useRef(Dimensions.get("window")).current;
   const [permission, requestPermission] = useCameraPermissions();
   const [modalText, setModalText] = useState(false);
@@ -85,16 +80,12 @@ export default function ScanQrCode({ onScan }: ScanQrCodeProps) {
                 top: 0,
                 width: "105%",
                 height: "101%",
-                borderBottomWidth: window.height / 2 - 200,
-                borderTopWidth: window.height / 2 - 100,
-                borderLeftWidth: window.width / 2 - 100,
-                borderRightWidth: window.width / 2 - 100,
-
-                borderColor: "rgba(0,0,0,0.7)",
-                borderRadius: 0.01,
                 zIndex: -1,
+                justifyContent: "center",
+                alignItems: "center",
               },
             ]}
+            children={<Ionicons name="scan" size={200} />}
           />
         </CameraView>
       </View>
@@ -135,6 +126,8 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     borderWidth: 2,
     position: "absolute",
-    zIndex: 5,
+    height: "100%",
+    width: "100%",
+    zIndex: -1,
   },
 });
