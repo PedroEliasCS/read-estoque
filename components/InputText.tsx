@@ -1,5 +1,5 @@
-import { StyleSheet, TextInput, TextInputProps, View } from "react-native";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { StyleSheet, TextInput, TextInputProps, View } from "react-native";
 import TextTheme from "./Text";
 const style = StyleSheet.create({
   container: {
@@ -109,6 +109,7 @@ export default function InputText(
         }}
         placeholderTextColor={useThemeColor({}, "placeHolder")}
         textAlignVertical="center"
+        accessibilityLabel={`Input de texto de ${props.titulo}`}
       />
       <View style={[style.notaContainer]}>
         {props.nota && (

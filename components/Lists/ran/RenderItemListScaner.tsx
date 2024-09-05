@@ -40,9 +40,15 @@ const RenderScanItem: React.FC<{ item: IProdutoPedido }> = React.memo(
             height: 50,
             width: 50,
           }}
+          accessibilityLabel={`Quadrado de 60x60 para marcar se o item ${item.descricao} foi escaneado`}
         >
           {item.scaneado && (
-            <Ionicons color={checkedColor} name="checkmark-circle" size={40} />
+            <Ionicons
+              color={checkedColor}
+              name="checkmark-circle"
+              size={40}
+              accessibilityLabel="Escaneado"
+            />
           )}
         </Quadrado60x60>
       </View>
