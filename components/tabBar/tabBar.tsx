@@ -22,7 +22,7 @@ export default function TabBarElement({ state, navigation }: TabBarProps) {
             params: {},
           });
         }}
-        text="Histórico"
+        text="Pedido"
         select={pageInFocus === "index"}
       />
       <ItemTabBar

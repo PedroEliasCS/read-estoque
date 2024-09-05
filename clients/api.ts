@@ -4,7 +4,7 @@ import delay from "@/util/delay";
 import mockPedidos from "./mock/pedidos.json";
 import mockProdutos from "./mock/ProdutosDePedido.json";
 
-export class Api {
+class Api {
   constructor() {}
 
   public async getPedidoEmAberto(page: number = 1): Promise<IPedido[]> {
