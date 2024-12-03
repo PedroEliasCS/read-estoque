@@ -43,7 +43,7 @@ class Api extends BaseApi {
       data: {
         pedidos: IPedido[];
       };
-    }>(`/pedido/colaborador/geral?sincronizar=true&page=${page}`);
+    }>(`/pedido/colaborador/geral?feito=false&sincronizar=true&page=${page}`);
 
     return response.data.data.pedidos;
   }
@@ -53,7 +53,7 @@ class Api extends BaseApi {
       data: {
         pedidos: IPedido[];
       };
-    }>(`/pedido/colaborador/compra?page=${page}`);
+    }>(`/pedido/colaborador/compra?feito=false&page=${page}`);
 
     return response.data.data.pedidos;
   }
@@ -73,7 +73,7 @@ class Api extends BaseApi {
       data: {
         pedidos: IPedido[];
       };
-    }>(`/pedido/colaborador/geral?page=${page}&feito=true`);
+    }>(`/pedido/colaborador/geral?feito=false&page=${page}&feito=true`);
 
     return response.data.data.pedidos;
   }

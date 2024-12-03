@@ -7,7 +7,6 @@ import { router } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
 
 export default function RenderPedidoItem({ item }: { item: IPedido }) {
-  console.log({ item });
   return (
     <Pressable
       style={styles.container}

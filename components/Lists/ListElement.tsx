@@ -1,3 +1,4 @@
+import { useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 import { RefreshControl, StyleSheet, View, ViewToken } from "react-native";
 import Animated, { useSharedValue } from "react-native-reanimated";
@@ -45,6 +46,7 @@ export default function ListElement<T>({
   more,
   DataRender,
 }: PropsListElement<IItemListElement<T>>) {
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
   const [{ page, solictNextPage }, setPage] = useState({
     page: 0,
@@ -54,7 +56,6 @@ export default function ListElement<T>({
   const viewableItems = useSharedValue<ViewToken[]>([]);
 
   const reloadInternal = () => {
-    console.log("Recarregando");
     setInfo([]);
     setPage({
       page: 1,
@@ -63,14 +64,17 @@ export default function ListElement<T>({
     setLoading(true);
     reload(setInfo)
       .finally(() => {
-        console.log(`Recarregado ${info.length}`);
         setLoading(false);
       })
       .catch(() => alert("Erro ao carregar"));
   };
 
   useEffect(() => {
-    reloadInternal();
+    navigation.addListener("focus", reloadInternal);
+
+    return () => {
+      navigation.removeListener("focus", reloadInternal);
+    };
   }, []);
 
   useEffect(() => {

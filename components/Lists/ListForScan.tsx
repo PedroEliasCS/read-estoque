@@ -52,7 +52,7 @@ export default function ListForScan({ tipo, pedido_id }: IParamsListForScan) {
       principal
         .getProdutosPedidoVenda(pedido_id)
         .then((produtos) => {
-          setProdutos(produtos.map((p) => ({ ...p, scaneado: true })));
+          setProdutos(produtos.map((p) => ({ ...p, scaneado: false })));
         })
         .finally(() => {
           setLoading(false);
