@@ -109,7 +109,6 @@ export default function IconSelect(props: props) {
           />
         </Svg>
       );
-
     case "Devolucao":
       return (
         <Svg width={width} height={height} viewBox="0 0 19 18" fill="none">
@@ -131,7 +130,6 @@ export default function IconSelect(props: props) {
           </Defs>
         </Svg>
       );
-
     case "Desconectar":
       return (
         <Svg width={width} height={height} viewBox="0 0 15 15" fill="none">

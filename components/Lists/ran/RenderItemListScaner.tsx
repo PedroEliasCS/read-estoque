@@ -1,4 +1,7 @@
-import { IProdutoPedido } from "@/clients/types/api.types";
+import {
+  IProdutosPedidoCompra,
+  IProdutosPedidoVenda,
+} from "@/clients/types/api.types";
 import ImageByWeb from "@/components/ImageByWeb";
 import Quadrado60x60 from "@/components/Quadrado60x60";
 import TextTheme from "@/components/Text";
@@ -7,14 +10,21 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-const RenderScanItem: React.FC<{ item: IProdutoPedido }> = React.memo(
+export type ProdutoParaScanner = { scaneado: boolean } & (
+  | IProdutosPedidoCompra
+  | IProdutosPedidoVenda
+);
+
+const RenderScanItem: React.FC<{ item: ProdutoParaScanner }> = React.memo(
   ({ item }) => {
     const checkedColor = useThemeColor({}, "entradaTexto");
+
+    console.log("item: ", item.produto_id.sku);
 
     return (
       <View style={styles.container}>
         <View style={styles.containerQuadrado}>
-          <ImageByWeb url={item.url} />
+          <ImageByWeb url={item.produto_id.urls[0]} />
         </View>
 
         <View style={styles.containerTexts}>
@@ -23,12 +33,12 @@ const RenderScanItem: React.FC<{ item: IProdutoPedido }> = React.memo(
               fontSize: 12,
             }}
           >
-            {item.descricao}
+            {item.produto_id.desc}
           </TextTheme>
           <TextTheme
             style={[styles.containerSKU, { fontSize: 10, color: "gray" }]}
           >
-            {item.sku}
+            {item.produto_id.sku}
           </TextTheme>
         </View>
 
@@ -40,7 +50,7 @@ const RenderScanItem: React.FC<{ item: IProdutoPedido }> = React.memo(
             height: 50,
             width: 50,
           }}
-          accessibilityLabel={`Quadrado de 60x60 para marcar se o item ${item.descricao} foi escaneado`}
+          accessibilityLabel={`Quadrado de 60x60 para marcar se o item ${item.produto_id.desc} foi escaneado`}
         >
           {item.scaneado && (
             <Ionicons

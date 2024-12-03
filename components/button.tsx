@@ -1,15 +1,25 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Pressable, PressableProps, StyleSheet } from "react-native";
 import TextTheme from "./Text";
+import Loading from "./loading";
 
 type Props = PressableProps & {
   titulo: string;
   loading?: boolean;
 };
 
-export default function Button({ titulo, disabled, ...outherProps }: Props) {
+export default function Button({
+  titulo,
+  loading,
+  disabled,
+  onPress,
+  ...outherProps
+}: Props) {
   const buttonActi = useThemeColor({}, "buttonActive");
   const buttonInac = useThemeColor({}, "buttonInactive");
+
+  const textColor = useThemeColor({}, "text");
+  const textInvert = useThemeColor({}, "textInverted");
 
   return (
     <Pressable
@@ -19,18 +29,21 @@ export default function Button({ titulo, disabled, ...outherProps }: Props) {
           backgroundColor: disabled ? buttonInac : buttonActi,
         },
       ]}
+      onPress={disabled || loading ? undefined : onPress}
       {...outherProps}
     >
-      <TextTheme
-        style={{
-          color: disabled
-            ? useThemeColor({}, "text")
-            : useThemeColor({}, "textInverted"),
-        }}
-        font="PoppinsBold"
-      >
-        {titulo}
-      </TextTheme>
+      {!loading && (
+        <TextTheme
+          style={{
+            color: disabled ? textColor : textInvert,
+          }}
+          font="PoppinsBold"
+        >
+          {titulo}
+        </TextTheme>
+      )}
+
+      {loading && <Loading color={textColor} />}
     </Pressable>
   );
 }

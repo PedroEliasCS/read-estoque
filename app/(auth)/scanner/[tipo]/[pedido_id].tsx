@@ -1,12 +1,9 @@
-import ListForScan from "@/components/Lists/ListForScan";
+import ListForScan, {
+  IParamsListForScan,
+} from "@/components/Lists/ListForScan";
 import { ThemedView } from "@/components/ThemedView";
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";
-
-type IParams = {
-  tipo: string;
-  pedido_id: string;
-};
 
 function alertAndGoBack() {
   alert("Pedido não encontrado");
@@ -14,7 +11,7 @@ function alertAndGoBack() {
 }
 
 export default function PedidoPage() {
-  const params = useLocalSearchParams<IParams>();
+  const params = useLocalSearchParams<IParamsListForScan>();
 
   useEffect(() => {
     if (typeof params === "undefined") alertAndGoBack();

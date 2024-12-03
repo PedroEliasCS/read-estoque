@@ -1,4 +1,4 @@
-import { IPedido } from "@/clients/types/api.types";
+import { IPedido, TipoPedido } from "@/clients/types/api.types";
 import EntradaComFundo from "@/components/EntradaComFundo";
 import SaidaComFundo from "@/components/SaidaComFundo";
 import TextTheme from "@/components/Text";
@@ -7,6 +7,7 @@ import { router } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
 
 export default function RenderPedidoItem({ item }: { item: IPedido }) {
+  console.log({ item });
   return (
     <Pressable
       style={styles.container}
@@ -14,19 +15,23 @@ export default function RenderPedidoItem({ item }: { item: IPedido }) {
         router.navigate({
           pathname: "/(auth)/scanner/[tipo]/[pedido_id]",
           params: {
-            tipo: item.tipo,
+            tipo: item.tipo || TipoPedido.venda,
             pedido_id: item.id,
           },
         })
       }
     >
       <View style={styles.containerPrimeiraLinha}>
-        {item.tipo == "C" ? <EntradaComFundo /> : <SaidaComFundo />}
+        {item.tipo == TipoPedido.compra ? (
+          <EntradaComFundo />
+        ) : (
+          <SaidaComFundo />
+        )}
         <TextTheme>NumPedido: {item.numeroPedido}</TextTheme>
       </View>
       <View style={styles.containerSegundaLinha}>
         <TextTheme>Data: {converter.dataParaExibicao(item.data)}</TextTheme>
-        <TextTheme>Total itens: {item.totalProdutos}</TextTheme>
+        <TextTheme>Total itens: {item.totalProduto}</TextTheme>
       </View>
     </Pressable>
   );

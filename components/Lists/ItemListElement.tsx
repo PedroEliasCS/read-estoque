@@ -1,4 +1,4 @@
-import { IPedido, IProdutoPedido } from "@/clients/types/api.types";
+import { IPedido } from "@/clients/types/api.types";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import React from "react";
 import { StyleSheet, ViewToken } from "react-native";
@@ -8,7 +8,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { IItemListElement } from "./ListElement";
-import RenderScanItem from "./ran/RenderItemListScaner";
+import RenderScanItem, { ProdutoParaScanner } from "./ran/RenderItemListScaner";
 import RenderPedidoItem from "./ran/RenderPedido";
 
 type PropRenderItemListElement<T> = {
@@ -61,8 +61,8 @@ export const RenderItemHome: IDataRender<IPedido> = React.memo(
 /**
  * Faz a renderização de um item da lista de Pedidos
  */
-export const RenderItemListScanner: IDataRender<IProdutoPedido> = React.memo(
-  ({ item, viewableItems }) => {
+export const RenderItemListScanner: IDataRender<ProdutoParaScanner> =
+  React.memo(({ item, viewableItems }) => {
     const coloBackGround = useThemeColor({}, "backGroundItemList");
 
     const animatedStyle = useAnimatedStyle(() => {
@@ -95,8 +95,7 @@ export const RenderItemListScanner: IDataRender<IProdutoPedido> = React.memo(
         <RenderScanItem item={item} />
       </Animated.View>
     );
-  }
-);
+  });
 
 const styles = StyleSheet.create({
   containerItem: {

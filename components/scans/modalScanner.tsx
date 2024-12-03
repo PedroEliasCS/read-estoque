@@ -1,10 +1,11 @@
-import { IProdutoPedido } from "@/clients/types/api.types";
+import { TipoPedido } from "@/clients/types/api.types";
 import Loading from "@/components/loading";
 import ModalAlert from "@/components/modals/ModalAlert";
 import ScanQrCode from "@/components/scans/ScanQrCode";
 import { ThemedView } from "@/components/ThemedView";
 
 import { useEffect, useState } from "react";
+import { ProdutoParaScanner } from "../Lists/ran/RenderItemListScaner";
 
 interface logScreen {
   text: string;
@@ -12,13 +13,13 @@ interface logScreen {
 }
 
 export type IParams = {
-  tipo: string;
+  tipo: TipoPedido;
   id: string;
 };
 
 type PropsScannerModal = {
-  setProdutos: React.Dispatch<React.SetStateAction<IProdutoPedido[]>>;
-  produtos: IProdutoPedido[];
+  setProdutos: React.Dispatch<React.SetStateAction<ProdutoParaScanner[]>>;
+  produtos: ProdutoParaScanner[];
   close: () => void;
 };
 
@@ -45,11 +46,10 @@ export default function ScannerModal({
   const complete = async (code: string) => {
     setLoading(true);
 
-    console.log(code);
-
-    const index = produtos.findIndex((p) => p.sku === code);
+    const index = produtos.findIndex((p) => p.produto_id.sku === code);
 
     if (index !== -1) {
+      console.log("dentro do if");
       if (produtos[index].scaneado) {
         setLogScreen({
           text: "Produto já escaneado",
@@ -71,9 +71,9 @@ export default function ScannerModal({
     }
 
     setLogScreen({
-      text: "Produto encontrado",
+      text: "Produto não encontrado nessa lista encontrado",
       close: () => {
-        reset();
+        close();
       },
     });
 

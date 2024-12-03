@@ -80,6 +80,14 @@ export default function InputText(
     autoCompletes?: string[];
   }
 ) {
+  const textColor = useThemeColor({}, "text");
+  const backGroundColor = useThemeColor({}, "inputBackground");
+  const errorColor = useThemeColor({}, "error");
+  const editableNot = useThemeColor({}, "editableNot");
+  const placeHolder = useThemeColor({}, "placeHolder");
+  const noteContainer = useThemeColor({}, "noteContainer");
+  const textBlue = useThemeColor({}, "textBlue");
+
   return (
     <View style={style.container}>
       <View style={style.tituloContainer}>
@@ -92,22 +100,22 @@ export default function InputText(
             [
               style.textInput,
               {
-                color: useThemeColor({}, "text"),
-                backgroundColor: useThemeColor({}, "inputBackground"),
+                color: textColor,
+                backgroundColor: backGroundColor,
               },
               props.error && {
-                borderColor: useThemeColor({}, "error"),
+                borderColor: errorColor,
                 borderWidth: 1,
               },
               // editable pode ser undefined, então não podemos usar !!props.editable
               props.editable === false && {
-                backgroundColor: useThemeColor({}, "editableNot"),
+                backgroundColor: editableNot,
               },
             ],
             props.style,
           ],
         }}
-        placeholderTextColor={useThemeColor({}, "placeHolder")}
+        placeholderTextColor={placeHolder}
         textAlignVertical="center"
         accessibilityLabel={`Input de texto de ${props.titulo}`}
       />
@@ -117,7 +125,7 @@ export default function InputText(
             style={[
               style.notaBalao,
               {
-                backgroundColor: useThemeColor({}, "noteContainer"),
+                backgroundColor: noteContainer,
               },
               !!props?.nota &&
                 props.nota.length > 20 && {
@@ -129,10 +137,10 @@ export default function InputText(
               style={[
                 style.nota,
                 {
-                  color: useThemeColor({}, "textBlue"),
+                  color: textBlue,
                 },
                 props.error && {
-                  color: useThemeColor({}, "error"),
+                  color: errorColor,
                 },
               ]}
               font="PoppinsBold"
