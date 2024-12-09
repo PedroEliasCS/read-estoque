@@ -1,5 +1,7 @@
 import {
+  IContato,
   IPedido,
+  IProduto,
   IProdutosPedidoCompra,
   IProdutosPedidoVenda,
   IUser,
@@ -114,6 +116,36 @@ class Api extends BaseApi {
     await this.patch(
       `/pedido/colaborador/marcarFeito/venda?pedido_id=${pedido_id}`
     );
+  }
+
+  public async getContatos(page: number = 1, filter = ""): Promise<IContato[]> {
+    const response = await this.get<{
+      data: {
+        contatos: IContato[];
+      };
+    }>(`/colaboradorRotas/contato?page=${page}&filter=${filter}`);
+
+    return response.data.data.contatos;
+  }
+
+  public async getProdutoBySku(sku: string): Promise<IProduto> {
+    const response = await this.get<{
+      data: {
+        produto: IProduto;
+      };
+    }>(`/colaboradorRotas/produtoPorSku?sku=${sku}`);
+
+    return response.data.data.produto;
+  }
+
+  public async postCriarPedidoCompra(
+    contato_id: string,
+    produtos: { produto_id: string; quantidade: number }[]
+  ): Promise<void> {
+    await this.post("/pedido/colaborador/criar?tipo=compra", {
+      contato_id,
+      produtos,
+    });
   }
 }
 

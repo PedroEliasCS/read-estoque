@@ -13,21 +13,23 @@ export default function Button({
   loading,
   disabled,
   onPress,
+  style,
   ...outherProps
 }: Props) {
   const buttonActi = useThemeColor({}, "buttonActive");
   const buttonInac = useThemeColor({}, "buttonInactive");
-
-  const textColor = useThemeColor({}, "text");
-  const textInvert = useThemeColor({}, "textInverted");
+  const textColor = useThemeColor({}, "textInverted");
+  const textInvert = useThemeColor({}, "text");
 
   return (
     <Pressable
       style={[
-        style.container,
+        styleLocal.container,
         {
           backgroundColor: disabled ? buttonInac : buttonActi,
         },
+        ,
+        style as any,
       ]}
       onPress={disabled || loading ? undefined : onPress}
       {...outherProps}
@@ -48,7 +50,7 @@ export default function Button({
   );
 }
 
-const style = StyleSheet.create({
+const styleLocal = StyleSheet.create({
   container: {
     marginVertical: 10,
     width: "80%",

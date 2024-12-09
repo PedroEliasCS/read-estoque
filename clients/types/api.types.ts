@@ -40,3 +40,19 @@ export interface IProdutosPedidoCompra extends IProdutoPedido {
 export interface IProdutosPedidoVenda extends IProdutoPedido {
   venda_id: string;
 }
+
+export interface IContato {
+  bling_id: number;
+  nome: string;
+  cecular: string;
+  id: string;
+}
+
+export interface IProduto {
+  bling_id: number;
+  desc: string;
+  sku: string;
+  price: number;
+  urls: string[];
+  id: string;
+}

@@ -1,14 +1,22 @@
+import KeyboardOpen from "@/hooks/keyboardOpen";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import ItemTabBar from "./ItemTabBar";
 
 type TabBarProps = BottomTabBarProps & {};
 
-export default function TabBarElement({ state, navigation }: TabBarProps) {
+function TabBarElement({ state, navigation }: TabBarProps) {
+  const keyBoard = KeyboardOpen();
+
   const colorBackGroundTabBar = useThemeColor({}, "tabBarBackground");
 
   const pageInFocus = state.routes[state.index].name;
+
+  if (keyBoard) {
+    return <View />;
+  }
 
   return (
     <View
@@ -61,6 +69,8 @@ export default function TabBarElement({ state, navigation }: TabBarProps) {
     </View>
   );
 }
+
+export default React.memo(TabBarElement);
 
 const styles = StyleSheet.create({
   container: {

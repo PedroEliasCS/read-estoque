@@ -21,7 +21,7 @@ type IMore<T> = (
 ) => Promise<void>;
 
 type PropsListElement<T> = {
-  title: string;
+  title: string | React.ReactNode;
   /**
    * Função que recarrega a lista
    */
@@ -104,15 +104,17 @@ export default function ListElement<T>({
     }
   }, [solictNextPage]);
 
-  useEffect(() => {
-    console.log({ loading });
-  }, [loading]);
+  useEffect(() => {}, [loading]);
 
   return (
     <ThemedView style={styles.container}>
-      <View style={styles.containerTitle}>
-        <TextTheme font="PoppinsBold">{title}</TextTheme>
-      </View>
+      {typeof title === "string" ? (
+        <View style={styles.containerTitle}>
+          <TextTheme>{title}</TextTheme>
+        </View>
+      ) : (
+        title
+      )}
       <View style={styles.containerList}>
         <Animated.FlatList
           data={info}
