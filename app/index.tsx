@@ -68,6 +68,7 @@ const FormLogin = () => {
           onChangeText: (text) => setPassword(text),
           value: password,
           placeholder: "Digite sua senha",
+          onSubmitEditing: submitLogin,
         }}
         error={showError && !valPassword}
       />

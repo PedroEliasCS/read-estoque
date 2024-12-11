@@ -31,7 +31,7 @@ export default function Entradas() {
           );
         }}
         more={async (setInfo, page) => {
-          await Api.getPedidoEmAberto(page).then((data) =>
+          await Api.getPedidoCompra(page).then((data) =>
             setInfo((prev) => [
               ...prev,
               ...data.map((item) => ({ ...item, tipo: TipoPedido.compra })),

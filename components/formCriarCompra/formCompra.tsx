@@ -2,6 +2,7 @@ import { IContato } from "@/clients/types/api.types";
 import { GlobalContext } from "@/context/global/Global";
 import { ModalContext } from "@/context/modal/Modal";
 import useVar from "@/hooks/useVar";
+import { InternalError } from "@/util/internal-error";
 import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
@@ -48,6 +49,20 @@ export default function CriarCompra() {
         }))
       )
       .catch((e) => {
+        if (e instanceof InternalError) {
+          if (
+            e.code === 482 &&
+            e.message.includes("Não foi possível lançar as contas")
+          )
+            open({
+              texto:
+                "Entrada criada, mas não foi possível lançar as contas a pagar",
+              afterClose: () => route.navigate("/(auth)/tab/entradas/"),
+            });
+
+          return 1;
+        }
+
         open({
           texto: e.message,
         });

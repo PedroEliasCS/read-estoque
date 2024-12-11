@@ -4,10 +4,8 @@ import { InternalError } from "@/util/internal-error";
 import React, { useContext, useEffect, useState } from "react";
 import { Modal, StyleSheet, View } from "react-native";
 import Button from "../button";
-import InputText from "../InputText";
 import ScanQrCode from "../scans/ScanQrCode";
 import TextTheme from "../Text";
-import { ThemedView } from "../ThemedView";
 
 export interface ProdutoScan {
   sku: string;
@@ -23,53 +21,28 @@ const ElementModalScan = ({
   close: () => void;
   updateList: React.Dispatch<React.SetStateAction<ProdutoScan[]>>;
 }) => {
-  const [sku, setSku] = useState("");
-  const [quantidade, setQuantidade] = useState(1);
+  const onScan = (sku: string) => {
+    updateList((old) => {
+      const find = old.find((p) => p.sku === sku);
 
-  if (sku)
-    return (
-      <ThemedView>
-        <TextTheme>Sku: {sku}</TextTheme>
-        <InputText
-          value={quantidade.toString()}
-          onChangeText={(t) => {
-            if (t == "") return setQuantidade(0);
+      if (find) {
+        find.quantidade = (find.quantidade || 1) + 1;
+        return old.filter((e) => find?.sku != e.sku).concat(find);
+      }
 
-            setQuantidade(parseInt(t));
-          }}
-          titulo="Quantidade"
-          keyboardType="number-pad"
-        />
-        <Button
-          titulo="Salvar"
-          onPress={() => {
-            updateList((old) => {
-              const exist = old.find((p) => p.sku === sku);
+      return old.concat({
+        sku,
+        quantidade: 1,
+      });
+    });
 
-              if (exist) {
-                exist.quantidade = quantidade;
-                return old
-                  .filter((p) => p.sku !== sku)
-                  .concat({
-                    sku,
-                    quantidade,
-                    id: exist.id,
-                    desc: exist.desc,
-                  });
-              }
+    close();
+  };
 
-              return old.concat({ sku, quantidade });
-            });
-            close();
-          }}
-        />
-      </ThemedView>
-    );
-
-  return <ScanQrCode onScan={setSku} close={close} />;
+  return <ScanQrCode onScan={onScan} close={close} />;
 };
 
-const ElementList = React.memo(({ produto }: { produto: ProdutoScan }) => {
+const ElementList = ({ produto }: { produto: ProdutoScan }) => {
   const {
     apis: { principal },
   } = useContext(GlobalContext);
@@ -102,6 +75,7 @@ const ElementList = React.memo(({ produto }: { produto: ProdutoScan }) => {
         justifyContent: "center",
         alignItems: "center",
       }}
+      key={produto.sku}
     >
       <View
         style={[
@@ -117,7 +91,6 @@ const ElementList = React.memo(({ produto }: { produto: ProdutoScan }) => {
         {!loading && !error && (
           <>
             <TextTheme>{produto.desc}</TextTheme>
-            <TextTheme>{produto.quantidade}</TextTheme>
           </>
         )}
 
@@ -125,7 +98,7 @@ const ElementList = React.memo(({ produto }: { produto: ProdutoScan }) => {
       </View>
     </View>
   );
-});
+};
 
 export default function ScanProduto({
   produtos,

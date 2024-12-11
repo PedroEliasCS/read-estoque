@@ -14,7 +14,7 @@ export default function Saida() {
     <ThemedView>
       <ListElement<IPedido>
         DataRender={RenderItemHome}
-        title="Pedidos de entrada"
+        title="Pedidos de saída"
         reload={async (setInfo) => {
           await Api.getPedidoVenda().then((data) =>
             setInfo(data.map((item) => ({ ...item, tipo: TipoPedido.venda })))

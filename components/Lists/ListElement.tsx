@@ -53,6 +53,7 @@ export default function ListElement<T>({
     solictNextPage: false,
   });
   const [info, setInfo] = useState<IItemListElement<T>[]>([]);
+  const [noMoreData, setNoMoreData] = useState(false);
   const viewableItems = useSharedValue<ViewToken[]>([]);
 
   const reloadInternal = () => {
@@ -87,9 +88,15 @@ export default function ListElement<T>({
       solictNextPage
     );
 
-    if (!!more && page > 1 && info.length > 0 && solictNextPage) {
-      console.log("Carregando mais", page, !!more);
+    if (
+      !noMoreData &&
+      !!more &&
+      page > 1 &&
+      info.length > 0 &&
+      solictNextPage
+    ) {
       setLoading(true);
+      const antes = info.length;
       more(setInfo, page)
         .catch(() => alert("Erro ao carregar"))
         .finally(() => {
@@ -100,11 +107,25 @@ export default function ListElement<T>({
               solictNextPage: false,
             };
           });
+
+          if (info.length === antes) {
+            setNoMoreData(true);
+          }
         });
     }
   }, [solictNextPage]);
 
   useEffect(() => {}, [loading]);
+
+  // Converte o array 'info' em um objeto onde as chaves são os 'id' dos itens
+  const reducedInfo = info.reduce((acc, item) => {
+    // Adiciona cada item ao objeto acumulador 'acc' usando o 'id' do item como chave
+    acc[item.id] = item;
+    return acc;
+  }, {} as Record<string, IItemListElement<T>>);
+
+  // Converte o objeto resultante de volta para um array contendo apenas os valores dos itens
+  const result = Object.values(reducedInfo);
 
   return (
     <ThemedView style={styles.container}>
@@ -117,22 +138,19 @@ export default function ListElement<T>({
       )}
       <View style={styles.containerList}>
         <Animated.FlatList
-          data={info}
+          data={result}
           renderItem={({ item }) => (
             <DataRender item={item} viewableItems={viewableItems} />
           )}
-          keyExtractor={(item) => {
-            return item.id;
-          }}
+          keyExtractor={(item) => item.id}
           onEndReached={() =>
             !solictNextPage &&
+            !noMoreData &&
             info.length > 0 &&
-            setPage((prev) => {
-              return {
-                page: prev.page + 1,
-                solictNextPage: true,
-              };
-            })
+            setPage((prev) => ({
+              page: prev.page + 1,
+              solictNextPage: true,
+            }))
           }
           onEndReachedThreshold={0.1}
           initialNumToRender={10}
@@ -143,10 +161,19 @@ export default function ListElement<T>({
           onViewableItemsChanged={({ viewableItems: vItem }) => {
             viewableItems.value = vItem;
           }}
-          ListFooterComponent={() => <>{loading && <Loading />}</>}
-          ListEmptyComponent={() => (
-            <>{loading ? <></> : <TextTheme>Vazio.</TextTheme>}</>
+          ListFooterComponent={() => (
+            <>
+              {loading && <Loading />}
+              <View style={{ height: 5 }} />
+            </>
           )}
+          ListEmptyComponent={() => (
+            <>{loading ? null : <TextTheme>Vazio.</TextTheme>}</>
+          )}
+          removeClippedSubviews={true}
+          maxToRenderPerBatch={10}
+          updateCellsBatchingPeriod={50}
+          windowSize={21}
         />
       </View>
     </ThemedView>

@@ -19,7 +19,7 @@ export default function Button({
   const buttonActi = useThemeColor({}, "buttonActive");
   const buttonInac = useThemeColor({}, "buttonInactive");
   const textColor = useThemeColor({}, "textInverted");
-  const textInvert = useThemeColor({}, "text");
+  const textInvert = useThemeColor({}, "buttonTextColor");
 
   return (
     <Pressable

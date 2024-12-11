@@ -44,6 +44,7 @@ const InputSecret = (
         titulo={props.titulo}
         error={props.error}
         nota={props.nota}
+        onSubmitEditing={props.textInputProps?.onSubmitEditing}
       />
 
       {(props.checkbox === undefined || props.checkbox) && (
