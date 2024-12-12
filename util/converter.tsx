@@ -10,4 +10,12 @@ export default {
 
     return `${day}/${month}/${year}`;
   },
+
+  cortaString(str: string, tamanho: number): string {
+    if (str.length > tamanho) {
+      return str.substring(0, tamanho) + "...";
+    }
+
+    return str;
+  },
 };

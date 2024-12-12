@@ -18,6 +18,10 @@ export interface IPedido {
   valorTotal: number;
   id: string;
   tipo?: TipoPedido;
+  contato_id: {
+    nome: string;
+    id: string;
+  };
 }
 
 interface IProdutoPedido {

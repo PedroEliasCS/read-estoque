@@ -26,9 +26,12 @@ export default function RenderPedidoItem({ item }: { item: IPedido }) {
         ) : (
           <SaidaComFundo />
         )}
-        <TextTheme>NumPedido: {item.numeroPedido}</TextTheme>
+        <TextTheme>
+          Nome: {converter.cortaString(item.contato_id.nome, 20).toLowerCase()}
+        </TextTheme>
       </View>
       <View style={styles.containerSegundaLinha}>
+        <TextTheme>Num: {item.numeroPedido}</TextTheme>
         <TextTheme>Data: {converter.dataParaExibicao(item.data)}</TextTheme>
         <TextTheme>Total itens: {item.totalProduto}</TextTheme>
       </View>
