@@ -65,10 +65,13 @@ export default function CriarCompra() {
 
         open({
           texto: e.message,
+          afterClose: () => route.navigate("/(auth)/tab/entradas/"),
         });
-        setLoading(false);
+
         return 1;
       });
+
+    setLoading(false);
 
     if (response === 1) return;
 
