@@ -63,9 +63,10 @@ export default function CriarCompra() {
             const { message } = e;
             open({
               texto: message,
+              iconName: `Devolucao`,
               afterClose: () => route.navigate("/(auth)/tab/entradas/"),
               textoCopiar: {
-                texto: `Clique para copiar e envie ao suporte`,
+                texto: `Clique para copiar`,
                 textoCopiado: JSON.stringify(e),
               },
             });

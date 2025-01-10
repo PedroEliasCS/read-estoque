@@ -2,6 +2,7 @@ import { TipoPedido } from "@/clients/types/api.types";
 import { GlobalContext } from "@/context/global/Global";
 import { ModalContext } from "@/context/modal/Modal";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { InternalError } from "@/util/internal-error";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
@@ -70,8 +71,8 @@ export default function ListForScan({ tipo, pedido_id }: IParamsListForScan) {
 
           setLoading(true);
 
-          if (tipo == TipoPedido.venda) {
-            principal
+          if (tipo == TipoPedido.venda)
+            return principal
               .finalizaPedidoVenda(pedido_id)
               .then(() => {
                 open({
@@ -80,15 +81,29 @@ export default function ListForScan({ tipo, pedido_id }: IParamsListForScan) {
                   afterClose: () => router.dismissAll(),
                 });
               })
-              .catch(() => {
-                open({
+              .catch((e) => {
+                if (e instanceof InternalError) {
+                  const { message } = e;
+
+                  return open({
+                    texto: message,
+                    iconName: "Saida",
+                    afterClose: () => router.dismissAll(),
+                    textoCopiar: {
+                      texto: `Clique para copiar`,
+                      textoCopiado: JSON.stringify(e),
+                    },
+                  });
+                }
+
+                return open({
                   texto: "Pedido NÃO finalizado",
                   iconName: "Entrada",
                   afterClose: () => router.dismissAll(),
                 });
               });
-          } else {
-            principal
+          else
+            return principal
               .finalizaPedidoCompra(pedido_id)
               .then(() => {
                 open({
@@ -97,14 +112,27 @@ export default function ListForScan({ tipo, pedido_id }: IParamsListForScan) {
                   afterClose: () => router.dismissAll(),
                 });
               })
-              .catch(() => {
-                open({
+              .catch((e) => {
+                if (e instanceof InternalError) {
+                  const { message } = e;
+
+                  return open({
+                    texto: message,
+                    iconName: "Saida",
+                    afterClose: () => router.dismissAll(),
+                    textoCopiar: {
+                      texto: `Clique para copiar`,
+                      textoCopiado: JSON.stringify(e),
+                    },
+                  });
+                }
+
+                return open({
                   texto: "Pedido NÃO finalizado",
                   iconName: "Saida",
                   afterClose: () => router.dismissAll(),
                 });
               });
-          }
         }}
         disabled={produtos.filter((p) => !p.scaneado).length > 0}
       />
