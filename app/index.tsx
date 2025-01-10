@@ -83,12 +83,17 @@ const FormLogin = () => {
 
 export default function FirstScreen() {
   const { auth } = useContext(GlobalContext);
+  const router = useRouter();
 
   useEffect(() => {
+    console.log("dentro");
     if (auth) {
-      useRouter().replace("/(auth)/tab");
+      console.log("dentro");
+      router.replace("/(auth)/tab");
     }
-  }, []);
+  }, [auth]);
+
+  console.log({ auth });
 
   return (
     <ThemedView>

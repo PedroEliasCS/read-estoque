@@ -59,7 +59,17 @@ export default function CriarCompra() {
                 "Entrada criada, mas não foi possível lançar as contas a pagar",
               afterClose: () => route.navigate("/(auth)/tab/entradas/"),
             });
-
+          else {
+            const { message } = e;
+            open({
+              texto: message,
+              afterClose: () => route.navigate("/(auth)/tab/entradas/"),
+              textoCopiar: {
+                texto: `Clique para copiar e envie ao suporte`,
+                textoCopiado: JSON.stringify(e),
+              },
+            });
+          }
           return 1;
         }
 
